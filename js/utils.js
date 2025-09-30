@@ -53,7 +53,7 @@ function addMap(baseCoordinates) {
     center: baseCoordinates, //Starting position [lng, lat]. Note that lat must be set between -90 and 90
     zoom: 12, //Starting zoom
     minZoom: 11.5, //Zoom bounds
-    maxZoom: 16,
+    maxZoom: 18,
     maxBounds: baseBounds, //Coordinate bounds
     pitch: 45,
     bearing: -45,
@@ -136,7 +136,7 @@ function addButtons(map, selectedLayers) {
 
     layerButtons.append(
       label,
-      addLegend(layer.legend),
+      addLegend2(layer.legend),
       document.createElement("br")
     );
   }); //End of forEach selectedLayer
@@ -159,6 +159,57 @@ function addLegend(legendData) {
 
   return legend;
 } //End of addLegend
+
+function addLegend2(legendData) {
+  let legend = document.createElement("div");
+  legend.id = legendData.id;
+  legend.className = legendData.class;
+
+  // If legendData has "items" (discrete), render as before
+  if (legendData.items) {
+    legendData.items.forEach((item) => {
+      let subDiv = document.createElement("div");
+      subDiv.innerHTML = `<span style="background-color: ${item.backgroundColor}; display:${item.display}; height:${item.styleHeight}; width:12px; margin-right:5px;"></span>`;
+      
+      let text = document.createElement("i");
+      text.textContent = Array.isArray(item.range) ? item.range.join(" - ") : item.range;
+      subDiv.appendChild(text);
+
+      legend.appendChild(subDiv);
+    });
+  }
+
+  // If legendData has "gradient" (continuous), render as gradient bar
+  if (legendData.gradient) {
+    let gradDiv = document.createElement("div");
+    gradDiv.style.height = "12px";
+    gradDiv.style.width = "100%";
+    gradDiv.style.background = `linear-gradient(to right, ${legendData.gradient.colors.join(",")})`;
+    gradDiv.style.marginBottom = "5px";
+    legend.appendChild(gradDiv);
+
+    // Add labels below the gradient
+    let labelsDiv = document.createElement("div");
+    labelsDiv.style.display = "flex";
+    labelsDiv.style.justifyContent = "space-between";
+    legendData.gradient.range.forEach((label) => {
+      let span = document.createElement("span");
+      span.textContent = label.split("(")[0].trim();  // keep only number
+      span.style.display = "inline-block";
+      span.style.width = "auto";     // don't force square
+      span.style.height = "auto";    // don't force height
+      span.style.margin = "0 2px";   // optional spacing
+      span.style.background = "none"; // remove background
+      span.style.border = "none";    // remove border
+      span.style.verticalAlign = "top"; // align with gradient bar
+      labelsDiv.appendChild(span);
+    });
+    legend.appendChild(labelsDiv);
+  }
+
+  return legend;
+} // End of addLegend2
+
 
 function addSlots(map, length) {
   // Empty source to add the layers without data (positioning layers)
