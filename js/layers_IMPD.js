@@ -122,8 +122,8 @@ var layers = [
     },
   },
   {
-    name: "Unevenness",
-    sourceLayerName: "IMPD_unevenness", //source-layer & source
+    name: "Slope",
+    sourceLayerName: "IMPD_slope", //source-layer & source
     attribution:
       "",
     sourceType: "geojson",
@@ -233,6 +233,50 @@ var layers = [
     filterBy: {
       active: false,
       fFeature: "Type",
+    },
+  },
+  {
+    name: "Barris",
+    sourceLayerName: "IMPD_barris", // source-layer & source
+    attribution: "",
+    sourceType: "geojson",
+    layerType: "fill",   // polygons
+    symbolization: {      
+      "fill-color": [
+        "interpolate",
+        ["linear"],
+        ["get", "Ponderated_Mean_Score"],
+        0, "#1a9641",   // good (green)
+        0.5, "#ffffbf", // neutral (yellowish)
+        1, "#d7191c"    // bad (red)
+      ],
+      "fill-opacity": 0.7,
+      "fill-outline-color": "#333"
+    },
+    legend: {
+      id: "legend-a",
+      class: "legend",
+      gradient: {
+        colors: ["#1a9641", "#ffffbf", "#d7191c"],
+        range: ["0 (Good)", "0.5", "1 (Bad)"]
+      }
+    },
+    states: {
+      visible: "visible",
+      popUps: true,
+      icons: false,
+      filterCat: false,
+      highlight: true,   // could highlight polygon border on hover
+      filterLayer: false,
+      dateRange: false,
+    },
+    popUpFeatures: {
+      event: "click",
+      fields: ["BARRI", "NOM", "Ponderated_Mean_Score"]
+    },
+    filterBy: {
+      active: false,
+      fFeature: "BARRI",
     },
   },
 ];
