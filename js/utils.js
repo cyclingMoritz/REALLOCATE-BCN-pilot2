@@ -442,10 +442,13 @@ function addPopUps2(map, layerName, fields, event) {
         if (field === "Evaluation") {
           let color = "#ccc";
           switch (value) {
-            case "Light": color = "#F6CF71"; break;
-            case "Moderate": color = "#F89C74"; break;
-            case "Severe": color = "#F03B20"; break;
             case "Accessible": color = "#6AB04C"; break;
+            case "Partially accessible": color = "#F6CF71"; break;
+
+            case "Accessible Transversally": color = "#F6CF71";value="Accessible T" ; break;
+            case "Accessible Longitudinally": color = "#F6CF71";value="Accessible L" ; break;
+
+            case "Non accessible": color = "#F03B20"; break;
           }
           value = `<span style="display:inline-block; padding:2px 6px; border-radius:4px; background-color:${color}; color:#fff; font-weight:bold;">${value}</span>`;
         }
