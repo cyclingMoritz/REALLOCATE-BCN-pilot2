@@ -136,6 +136,8 @@ var layers = [
         "match",
         ["get", "Evaluation"],   // property name in your GeoJSON
         "Accessible", "#A6D96A",
+        "Accessible Transversally","#F6CF71",
+        "Accessible Longitudinally","#F6CF71",
         "Non accessible", "#F03B20",
         /* default color */ "hsl(0, 0%, 70%)"
       ]
@@ -150,6 +152,18 @@ var layers = [
       display: "inline-block",
       backgroundColor: "#A6D96A",
       range: ["Accessible"]
+    },
+    {
+      styleHeight: "12px",
+      display: "inline-block",
+      backgroundColor: "#F6CF71",
+      range: ["Accessible Transversally"]
+    },
+    {
+      styleHeight: "12px",
+      display: "inline-block",
+      backgroundColor: "#F6CF71",
+      range: ["Accessible Longitudinally"]
     },
     {
       styleHeight: "12px",
@@ -193,7 +207,7 @@ var layers = [
         "match",
         ["get", "Evaluation"],   // property name in your GeoJSON
         "Accessible", "#A6D96A",
-        "Partially", "#F6CF71",
+        "Partially accessible", "#F6CF71",
         /* default color */ "hsl(0, 0%, 70%)"
       ]
 
@@ -212,7 +226,7 @@ var layers = [
       styleHeight: "12px",
       display: "inline-block",
       backgroundColor: "#F6CF71",
-      range: ["Partially"]
+      range: ["Partially accessible"]
     }
       ],
     },
@@ -236,7 +250,7 @@ var layers = [
     },
   },
   {
-    name: "Barris",
+    name: "Accessibility Score",
     sourceLayerName: "IMPD_barris", // source-layer & source
     attribution: "",
     sourceType: "geojson",
@@ -245,10 +259,10 @@ var layers = [
       "fill-color": [
         "interpolate",
         ["linear"],
-        ["get", "Ponderated_Mean_Score"],
-        0, "#1a9641",   // good (green)
-        0.5, "#ffffbf", // neutral (yellowish)
-        1, "#d7191c"    // bad (red)
+        ["get", "Accessibility Score"],
+        0, "#d7191c",   // good (green)
+        50, "#ffffbf", // neutral (yellowish)
+        100, "#1a9641"   // bad (red)
       ],
       "fill-opacity": 0.7,
       "fill-outline-color": "#333"
@@ -257,8 +271,8 @@ var layers = [
       id: "legend-a",
       class: "legend",
       gradient: {
-        colors: ["#1a9641", "#ffffbf", "#d7191c"],
-        range: ["0 (Good)", "0.5", "1 (Bad)"]
+        colors: ["#d7191c", "#ffffbf", "#1a9641"],
+        range: ["0 (Bad)", "50", "100 (Good)"]
       }
     },
     states: {
@@ -272,11 +286,11 @@ var layers = [
     },
     popUpFeatures: {
       event: "click",
-      fields: ["BARRI", "NOM", "Ponderated_Mean_Score"]
+      fields: [ "Name","Number", "Accessibility Score"]
     },
     filterBy: {
       active: false,
-      fFeature: "BARRI",
+      fFeature: "Number",
     },
   },
 ];
