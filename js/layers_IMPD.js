@@ -13,7 +13,7 @@ var layers = [
       "Accessibility Data <a href='https://opendata-ajuntament.barcelona.cat/data/ca/dataset/accessibilitat-via-publica'>©Ajuntament de Barcelona</a> (<a href='https://creativecommons.org/licenses/by/4.0/deed.ca'>CC BY 4.0</a>)",
     sourceType: "geojson",
     layerType: "circle",
-    symbolization: {      "circle-radius": 6,
+    symbolization: {      
       "circle-stroke-width": 1,
       "circle-stroke-color": "#333",
       "circle-color": [
@@ -23,6 +23,13 @@ var layers = [
         "Unevenness", "hsl(120, 40%, 55%)",
         "Width", "hsl(30, 70%, 60%)",
         /* default color */ "hsl(0, 0%, 70%)"
+      ],
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        12, 0,
+        15, 5
       ]
 
     },
@@ -57,70 +64,7 @@ var layers = [
       fFeature: "Type",
     },
   },
-  // {
-  //   name: "Obstacles",
-  //   sourceLayerName: "IMPD_obstacles", //source-layer & source
-  //   attribution:
-  //     "Accessibility Data: <a href='https://opendata-ajuntament.barcelona.cat/data/ca/dataset/accessibilitat-via-publica'>©Ajuntament de Barcelona</a> (<a href='https://creativecommons.org/licenses/by/4.0/deed.ca'>CC BY 4.0</a>)",
-  //   sourceType: "geojson",
-  //   layerType: "circle",
-  //   symbolization: {      
-  //     "circle-radius": 5,
-  //     // "circle-stroke-width": 1,
-  //     // "circle-stroke-color": "#333",
-  //     "circle-color": [
-  //       "match",
-  //       ["get", "Evaluation"],   // property name in your GeoJSON
-  //       "Light", "#F6CF71",
-  //       "Moderate", "#F89C74",
-  //       "Severe", "#F03B20",
-  //       /* default color */ "hsl(0, 0%, 70%)"
-  //     ]
-
-  //   },
-  //   legend: {
-  //     id: "legend-a",
-  //     class: "legend",
-  //     items: [
-  //   {
-  //     styleHeight: "12px",
-  //     display: "inline-block",
-  //     backgroundColor: "#F6CF71",
-  //     range: ["Light"]
-  //   },
-  //   {
-  //     styleHeight: "12px",
-  //     display: "inline-block",
-  //     backgroundColor: "#F89C74",
-  //     range: ["Moderate"]
-  //   },
-  //   {
-  //     styleHeight: "12px",
-  //     display: "inline-block",
-  //     backgroundColor: "#F03B20",
-  //     range: ["Severe"]
-  //   }
-  //     ],
-  //   },
-  //   states: {
-  //     visible: "visible",
-  //     popUps: true,
-  //     icons: true,
-  //     filterCat: true,
-  //     highlight: false,
-  //     filterLayer: false,
-  //     dateRange: false,
-  //   },
-  //   popUpFeatures: {
-  //     event: "click",
-  //     fields: ["Type", "Evaluation", "Value"]
-  //     // img: "image" // optional, you can add later if needed
-  //   },
-  //   filterBy: {
-  //     active: false,
-  //     fFeature: "Type",
-  //   },
-  // },
+  
   {
     name: "Slope",
     sourceLayerName: "IMPD_slope", //source-layer & source
@@ -129,7 +73,7 @@ var layers = [
     sourceType: "geojson",
     layerType: "circle",
     symbolization: {      
-      "circle-radius": 5,
+      // "circle-radius": 5,
       // "circle-stroke-width": 1,
       // "circle-stroke-color": "#333",
       "circle-color": [
@@ -140,6 +84,13 @@ var layers = [
         "Accessible Longitudinally","#F6CF71",
         "Non accessible", "#F03B20",
         /* default color */ "hsl(0, 0%, 70%)"
+      ],
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        12, 0,
+        15, 5
       ]
 
     },
@@ -200,7 +151,7 @@ var layers = [
     sourceType: "geojson",
     layerType: "circle",
     symbolization: {      
-      "circle-radius": 5,
+      // "circle-radius": 5,
       // "circle-stroke-width": 1,
       // "circle-stroke-color": "#333",
       "circle-color": [
@@ -209,6 +160,13 @@ var layers = [
         "Accessible", "#A6D96A",
         "Partially accessible", "#F6CF71",
         /* default color */ "hsl(0, 0%, 70%)"
+      ],
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        12, 0,
+        15, 5
       ]
 
     },
